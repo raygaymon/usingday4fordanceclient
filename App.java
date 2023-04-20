@@ -43,7 +43,8 @@ public class App
 
                 //while loop
                 while (!keyboardInput.equals("close")) {
-                    keyboardInput = cons.readLine("Are you ready to receive your fortune?");
+
+                    keyboardInput = cons.readLine("Please insert $2 to receive your fortune: \n");
 
                     //send msg through to server
                     dos.writeUTF(keyboardInput);
@@ -52,7 +53,7 @@ public class App
                     //receive message from server
                     //add received msg to msgreceived
                     msgReceived = disNuts.readUTF();
-                    System.out.println(msgReceived);
+                    System.out.println("\n" + msgReceived + "\n\nHope you get your favourite fortune next time!\n");
 
                 }
 
