@@ -8,6 +8,8 @@ import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -35,7 +37,7 @@ public class App
 
         try (InputStream is = socket.getInputStream()) {
             BufferedInputStream bisNuts = new BufferedInputStream(is);
-            DataInputStream disNuts = new DataInputStream(bisNuts);
+            DataInputStream dis = new DataInputStream(bisNuts);
 
             try (OutputStream os = socket.getOutputStream()) {
                 BufferedOutputStream bos = new BufferedOutputStream(os);
@@ -52,7 +54,7 @@ public class App
 
                     //receive message from server
                     //add received msg to msgreceived
-                    msgReceived = disNuts.readUTF();
+                    msgReceived = dis.readUTF();
                     System.out.println("\n" + msgReceived + "\n\nPlease train well and stop being shit!\n");
 
                 }
@@ -69,8 +71,8 @@ public class App
 
             }
 
+            dis.close();
             bisNuts.close();
-            disNuts.close();
             is.close();
 
         } catch (EOFException ex) {
